@@ -1,0 +1,17 @@
+.container {}
+
+    .container--top {
+        margin-top: 60px;
+    }
+    .container--body {
+        margin-top: 100px;
+    }
+    .container__title {
+        text-align: center;
+        @include font-size(32px);
+    }
+    .container__desc {
+        text-align: center;
+        @include font-size(14px);
+        margin-top: 16px;
+    }

@@ -1,0 +1,16 @@
+$font-regular: "Muli", Arial, sans-serif;
+$font-weight-regular: 400;
+$font-weight-bold: 700;
+
+$red: #fc115d;
+
+* {
+    font-family: $font-regular;
+    font-weight: $font-weight-regular;
+    box-sizing: border-box;
+}
+
+body {
+    min-height: 768px;
+    color: #313131;
+}

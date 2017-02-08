@@ -1,0 +1,26 @@
+.button {
+    display: block;
+    text-decoration: none;
+    color: white;
+}
+
+    .button--normal {
+        background: $red;
+        height: 44px;
+        line-height: 44px;
+        border-radius: 5px;
+    }
+
+    .button--big {
+        background: $red;
+        height: 88px;
+        line-height: 88px;
+        border-radius: 5px;
+        @include font-size(32px);
+
+        @media only screen and (max-width: 768px) {
+            height: 55px;
+            line-height: 55px;
+            @include font-size(16px);
+        }
+    }
