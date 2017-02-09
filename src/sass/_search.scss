@@ -9,3 +9,21 @@
         height: 50px;
         @include font-size(16px);
     }
+
+    .search__result {
+        margin: 30px;
+        text-align: left;
+    }
+
+    .search__result--header {
+        @include font-size(32px);
+        font-weight: $font-weight-bold;
+        margin-bottom: 20px;
+        padding-bottom: 10px;
+        border-bottom: 1px solid #dadada;
+    }
+
+    .search__result--desc {
+        @include font-size(18px);
+        line-height: 25px;
+    }

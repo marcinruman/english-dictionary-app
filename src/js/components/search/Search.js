@@ -11,14 +11,13 @@ export default class Search extends React.Component {
 
         /**
          * Stores a successful search result
-         * @type {null}
+         * @type {Array}
          * @private
          */
-        this._searchResult = null;
+        this._searchResult = [];
     }
 
-    searchHandler(e) {
-        console.log(this.refs.searchInput.value);
+    searchHandler() {
         this.searchObj(Dictionary, this.refs.searchInput.value);
     }
 
@@ -27,14 +26,17 @@ export default class Search extends React.Component {
         for (let key in obj) {
             let value = obj[key];
 
+            // convert to lower case string in order to easier compare the values
+            query = query.toString().toLowerCase().trim();
+            key = key.toString().toLowerCase();
+
             if (typeof value === 'object') {
                 this.searchObj(value, query);
             }
 
             if (key === query) {
-                this._searchResult = value;
-                this.setState({showResult: true});
-                console.log('property=' + key + ' value=' + value);
+                this._searchResult = [key, value]; // assign a search result
+                this.setState({showResult: true}); // change the state to render the result
             }
 
         }
@@ -48,8 +50,9 @@ export default class Search extends React.Component {
                 <button className="button button--big" onClick={this.searchHandler.bind(this)}>Search</button>
 
                 {this.state.showResult ?
-                    (<div>
-                        Result Found: {this._searchResult}
+                    (<div className="search__result">
+                        <h2 className="search__result--header">{this._searchResult[0]}</h2>
+                        <p className="search__result--desc">{this._searchResult[1]}</p>
                     </div>) :
                     null
                 }
