@@ -27,3 +27,12 @@
         @include font-size(18px);
         line-height: 25px;
     }
+
+    .search__result--error {
+        color: #d9534f;
+    }
+
+    .search__result--noword {
+        font-weight: $font-weight-bold;
+        word-wrap: break-word;
+    }

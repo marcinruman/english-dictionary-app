@@ -6,7 +6,8 @@ export default class Search extends React.Component {
         super();
 
         this.state = {
-            showResult: false
+            showResult: false,
+            showError: false
         };
 
         /**
@@ -17,11 +18,13 @@ export default class Search extends React.Component {
         this._searchResult = [];
     }
 
-    searchHandler() {
-        this.searchObj(Dictionary, this.refs.searchInput.value);
+    searchFormHandler(e) {
+        e.preventDefault();
+        this.searchDictionary(Dictionary, this.refs.searchInput.value);
     }
 
-    searchObj(obj, query) {
+    searchDictionary(obj, query) {
+        let foundResult = false;
 
         for (let key in obj) {
             let value = obj[key];
@@ -31,28 +34,52 @@ export default class Search extends React.Component {
             key = key.toString().toLowerCase();
 
             if (typeof value === 'object') {
-                this.searchObj(value, query);
+                this.searchDictionary(value, query);
             }
 
             if (key === query) {
-                this._searchResult = [key, value]; // assign a search result
-                this.setState({showResult: true}); // change the state to render the result
+                foundResult = true;
+                this.searchResultFound(key, value);
             }
-
         }
 
+        // no result
+        if(foundResult === false) {
+            this.searchResultNotFound();
+        }
+    }
+
+    searchResultFound(key, value) {
+        this._searchResult = [key, value]; // assign a search result
+        this.setState({showError: false}); // now as there is a match, let's hide any errors that might have been showed earlier
+        this.setState({showResult: true}); // change the state to render the result
+    }
+
+    searchResultNotFound() {
+        this.setState({showResult: false}); // make sure there is no previous results found
+        this.setState({showError: true}); // render the 'no results found' message
     }
 
     render() {
         return (
             <div className="search">
-                <input className="search__input" type="text" placeholder="What word you want to look up?" ref="searchInput" />
-                <button className="button button--big" onClick={this.searchHandler.bind(this)}>Search</button>
-
+                <form>
+                    <input className="search__input" type="text" placeholder="What word do you want to look up?" ref="searchInput" />
+                    <button type="submit" className="button button--big" onClick={this.searchFormHandler.bind(this)}>Search</button>
+                </form>
                 {this.state.showResult ?
                     (<div className="search__result">
                         <h2 className="search__result--header">{this._searchResult[0]}</h2>
                         <p className="search__result--desc">{this._searchResult[1]}</p>
+                    </div>) :
+                    null
+                }
+
+                {this.state.showError ?
+                    (<div className="search__result">
+                        <h2 className="search__result--header search__result--error">No result found...</h2>
+                        <p className="search__result--desc">Sorry, our super smart, mini dictionary hasn't yet learnt about: <i className="search__result--noword">{this.refs.searchInput.value}</i>.</p>
+                        <p className="search__result--desc">Why don't you feed it with something else instead?</p>
                     </div>) :
                     null
                 }
