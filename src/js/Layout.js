@@ -9,7 +9,7 @@ export default class Layout extends React.Component {
         return (
             <div className="container container--body">
                 <div className="row center-xs center-md">
-                    <div className="col-xs-12 col-md-6">
+                    <div className="col-xs-12 col-md-8">
                         <h1 className="container__title">Dictionary</h1>
                         <p className="container__desc">Mini English Dictionary App</p>
                         <Search />

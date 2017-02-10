@@ -20,7 +20,21 @@ export default class Search extends React.Component {
 
     searchFormHandler(e) {
         e.preventDefault();
-        this.searchDictionary(Dictionary, this.refs.searchInput.value);
+
+        if(this.validate() === false) {
+            return;
+        } else {
+            this.searchDictionary(Dictionary, this.refs.searchInput.value);
+        }
+    }
+
+    validate() {
+        if(this.refs.searchInput.value === "") {
+            this.refs.searchInput.placeholder = "Hey, feed me something here...";
+            return false;
+        } else {
+            this.refs.searchInput.placeholder = "What word do you want to look up?";
+        }
     }
 
     searchDictionary(obj, query) {
