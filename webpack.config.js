@@ -22,15 +22,15 @@ module.exports = {
             {
                 test: /\.jsx?$/,
                 exclude: /(node_modules|bower_components)/,
-                loader: 'babel-loader',
+                loader: "babel-loader",
                 query: {
-                    presets: ['react', 'es2015', 'stage-0'],
-                    plugins: ['react-html-attrs', 'transform-decorators-legacy', 'transform-class-properties', 'transform-react-jsx-img-import']
+                    presets: ["react", "es2015", "stage-0"],
+                    plugins: ["react-html-attrs", "transform-decorators-legacy", "transform-class-properties", "transform-react-jsx-img-import"]
                 }
             },
             {
                 test: /\.(png|jpg|gif)$/,
-                loaders: ['file-loader?limit=5000&name=images/[name]-[hash:6].[ext]'],
+                loaders: ["file-loader?limit=5000&name=images/[name]-[hash:6].[ext]"],
                 exclude: /(node_modules|bower_components)/
             },
             {
